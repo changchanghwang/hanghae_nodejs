@@ -1,0 +1,16 @@
+extends index.pug
+
+block head 
+    script(defer, src="/js/submit.js")
+
+block content
+    div(class = "sub_wrap")
+        div(class = "content")
+            h2 등록하기
+        div
+            input(type="text" name="title" class="sb_title" placeholder="제목을 입력해주세요") 
+        div
+            input(type="text" name="desc" class="sb_desc" placeholder="설명을 입력해주세요")
+        button(class="submit_btn") 등록하기
+        a(href="/")
+            button 취소

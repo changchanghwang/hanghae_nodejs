@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hwang's HangHae blog</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="top">
+        <h1>Hwang's HangHae blog</h1>
+    </div>
+    <div class="menu">
+        <a href="/"><div>게시글 보기</div></a>
+        <a href="/submit"><div>게시글 등록</div></a>
+    </div>
+    <section class="cardCloumn" id="card_list">
+        <div class="cardRow2">
+            <% for(let i=0; i < card.length; i++) {%>
+                <div class="ListBg">
+                    <div class="ListFlex">
+                        <div class="click-wrap">
+                            <div class="imgHidden-box">
+                                <img src="/img/linkgather.png" class="classImg">
+                                <h3 class="title"> <%= card[i].title %> </h3>
+                                <h4 class="desc"><%= card[i].desc %></h4>
+                                <span class="time">작성시간: <%= card[i].submitTime %></span>
+                                <hr/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </section>
+</body>
+</html>

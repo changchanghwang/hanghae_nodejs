@@ -1,0 +1,20 @@
+extends index.pug
+
+block head 
+    script(src="/js/home.js") 
+
+block content
+    section(class="cardCloumn" id="card_list")
+        div(class="cardRow2" id="aa")
+            -#{card}.forEach((list)=>{
+                div(class="ListBg")
+                    div(class="ListFlex")
+                        div(class="click-wrap")
+                            div(class="imgHidden-box")
+                                img(src="/img/linkgather.png" class="classImg")
+                                h3(class="title") #{card[i].title}
+                                h4(class="desc") #{card[i].desc}
+                                span(class="time") #{card[i].submitTime}
+                                hr
+            -})
+                
