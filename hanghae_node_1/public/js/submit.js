@@ -9,7 +9,6 @@ async function submitCard(){
     let desc = descInput.value;
     let author = authorInput.value;
     let pw = pwInput.value;
-    console.log(author, pw)
 
     let res = await fetch('/api/submit',{
         method:"POST",

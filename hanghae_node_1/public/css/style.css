@@ -5,6 +5,9 @@ body{
     display: flex;
     justify-content: center;
 }
+.top:hover{
+    cursor:pointer;
+}
 
 .menu{
     display: flex;
@@ -51,12 +54,12 @@ body{
     -webkit-box-orient: vertical;
     margin: 4px 0px 6px;
 }
-.time{
-    font-size: 14px;
+.etc{
+    font-size: 12px;
     font-weight: normal;
     color: rgb(26, 26, 26);
     display: flex;
-    justify-content: end;
+    justify-content: space-between
 }
 .sub_wrap{
     width: 500px;
@@ -84,4 +87,94 @@ body{
 }
 .sb_password{
     width: 40%;
+}
+
+.menu_d{
+    width: 150px;
+    margin: auto;
+    text-align: center;
+}
+
+.cardCloumn_d {
+    display: grid;
+    width: 500px;
+    margin: auto;
+}
+
+.cardRow2_d {
+    width:100%;
+    align-items: start;
+}
+.ListBg_d {
+    position: relative;
+    margin-bottom: 32px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.classImg_d{
+    width:500px;
+}
+.ListFlex_d .title_d .desc_d {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: rgb(26, 26, 26);
+    height: 20px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    margin: 4px 0px 6px;
+}
+.etc_d{
+    font-size: 12px;
+    font-weight: normal;
+    color: rgb(26, 26, 26);
+}
+
+.hidden{
+    display: none;
+}
+
+/* .modalWrap{
+    background-color: white;
+    width: 600px;
+    height: 300px;
+    text-align: center;
+    vertical-align: middle;
+} */
+
+.del-background{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10;
+}
+.del-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 100vh;
+    z-index: 10;
+}
+.del-content{
+  padding: 30px 40px;
+  background-color: #fff;
+}
+.del-submit-btn
+.del-close-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  border: 0;
+  border-radius: 3px;
+  background-color: #000;
 }

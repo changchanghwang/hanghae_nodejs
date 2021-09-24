@@ -13,6 +13,18 @@ const cardSchema = new Schema({
     submitTime:{
         type:Number,
         required: true
+    },
+    author:{
+        type:String,
+        required: true
+    },
+    pw:{
+        type:String,
+        required:true
+    },
+    date:{
+        type:String,
+        required:true
     }
 })
 

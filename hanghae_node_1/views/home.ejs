@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="top">
+    <div class="top" onclick="window.location.href='/'">
         <h1>Hwang's HangHae blog</h1>
     </div>
     <div class="menu">
@@ -18,14 +18,18 @@
     <section class="cardCloumn" id="card_list">
         <div class="cardRow2">
             <% for(let i=0; i < card.length; i++) {%>
-                <div class="ListBg">
+                <div class="ListBg" onclick="location.href=`/detail?cardId=<%= card[i]._id %>`">
+                    <!-- onclick="location.href='/detail?goodsId=${item["goodsId"]}'" -->
                     <div class="ListFlex">
                         <div class="click-wrap">
                             <div class="imgHidden-box">
                                 <img src="/img/linkgather.png" class="classImg">
                                 <h3 class="title"> <%= card[i].title %> </h3>
                                 <h4 class="desc"><%= card[i].desc %></h4>
-                                <span class="time">작성시간: <%= card[i].submitTime %></span>
+                                <div class ="etc">
+                                <span class="author">작성자 :<%= card[i].author %></span>
+                                <span class="time">작성시간: <%= card[i].date %></span>
+                                </div>
                                 <hr/>
                             </div>
                         </div>
