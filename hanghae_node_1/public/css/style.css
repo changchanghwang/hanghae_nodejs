@@ -34,6 +34,7 @@ body{
 }
 .ListBg {
     position: relative;
+    width:300px;
     margin-bottom: 32px;
     border-radius: 5px;
     cursor: pointer;
@@ -41,7 +42,7 @@ body{
 .classImg{
     width:300px;
 } 
-.ListFlex .title .desc {
+.title, .desc, .author {
     font-size: 14px;
     font-weight: normal;
     line-height: 20px;

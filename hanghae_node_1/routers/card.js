@@ -20,6 +20,7 @@ router.get('/detail/:cardId', async(req, res)=>{
 
 router.patch('/detail/:cardId', async(req, res)=>{
     const {cardId} = req.params;
+    console.log(cardId);
     const {pw, title, desc, author} = req.body;
     console.log(cardId, pw);
     const cardsExist = await cards.find({'_id':cardId, pw:pw})
