@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hwang's HangHae blog</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script defer src="/js/edit.js"></script>
+</head>
+<body>
+    <div class="top" onclick="window.location.href='/'">
+        <h1>Hwang's HangHae blog</h1>
+    </div>
+    <div class="menu">
+      <a href="/"><div>게시글 보기</div></a>
+      <a href="/submit"><div>게시글 등록</div></a>
+    </div>
+    <h3 class="menu_d">상세페이지</h3>
+    <section class="cardCloumn_d" id="card_list">
+      <div class="cardRow2_d">
+        <div class="ListBg_d">
+            <div class="ListFlex_d">
+                <div class="click-wrap_d">
+                    <div class="imgHidden-box_d">
+                        <img src="/img/linkgather.png" class="classImg_d">
+                        <div class = "detailForm">
+                          <h3 class="title_i">제목: <input type="text" placeholder="제목을 입력해주세요" class="titleE" value=<%= card.title %>> </h3>
+                          <h4 class="desc_i">설명: <textarea type="text" placeholder="설명을 입력해주세요" class="descE" ><%= card.desc %></textarea></h4>
+                          <div class='etc_d'>
+                            <div class="author_i">작성자: <input type="text" placeholder="작성자를 입력해주세요" class="authorE" value=<%= card.author %>></div>
+                            <div class="time_i">비밀번호: <input type="password" placeholder="비밀번호를 확인해주세요" class="pwCheck"></div>
+                          </div>
+                          <div>
+                            <button class="submitEdit">수정하기</button>
+                            <button class="cancelEdit" onclick="window.location.href=`/edit?cardId=<%= card.id %>`">취소</button>
+                          </div>
+                        </div>
+                        <div class="modiForm">
+
+                        </div>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+  </section>
+
+  <div class="del-background hidden">
+    <div class="del-wrap">
+      <section class="del-content">
+          <div class="flex-layout-between">
+              <h3>정말 삭제하시겠습니까?</h3>
+              <div>
+                <input type="password" placeholder="비밀번호를 입력해주세요" class="passwordCheck">
+              </div>
+              <button class="del-submit-btn">예</button>
+              <button class="del-close-btn">닫기</button>
+          </div>
+      </section>
+    </div>
+  </div>  
+
+</body>
+</html>
