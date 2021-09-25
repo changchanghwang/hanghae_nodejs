@@ -21,7 +21,14 @@ router.get('/', async(req, res)=>{
     const {cardId} = req.query;
     console.log(req.query);
     card = await cards.findOne({_id:cardId})
-    const ment = await comments.find({cardId:cardId}).sort("-submitTime");
+    const ment = await comments.find({cardId:cardId});
+    let pipeline = []
+    // pipeline.push(
+    //     {
+
+    //     }
+    // )
+    // await comments.
     res.render('detail', {card, ment})
 })
 

@@ -42,19 +42,19 @@
                           <input type="hidden" name="cardId" value=<%= card._id %>>
                           <button  class="submitComment">등록하기</button>
                         </form>
-                        <% for(let i=0; i < ment.length; i++) {%>
-                        <div class="commentWrap">
-                          <div class="commentFlex"
+                        <% for(let i=0; i < ment.length; i++) { %>
+                        <div class="commentWrap" style="margin-left:50*'<%= ment[i].commentDepth %>'px;">
+                          <div class="commentFlex">
                             <div class="comment  <%= ment[i].parentComment %>" id="<%= ment[i]._id %>" >
                               <input class="commentDepth" type="hidden" name="commentDepth" value=" <%= ment[i].commentDepth %>">
                               <div class="com"><%= ment[i].comment %></div>
                               <div class="date">작성 날짜: <%= ment[i].date %></div>
-                              <button class="comment2" onclick= "commentModal('<%= i %>')">댓글</button>
-                              <div class="commentForm2 ">
-                                <input type="text" name="comment2" class="commentInput">
-                                <button class="submitComment2">등록하기</button>
-                              </div>
                             </div>
+                            <button class="comment2" onclick= "commentModal('<%= i %>')">댓글</button>
+                              <div class="commentForm2 hidden">
+                                <input type="text" name="comment2" class="commentInput">
+                                <button class="submitComment2" onclick= "subComment('<%= ment[i].commentDepth %>', '<%= ment[i]._id %>')">등록하기</button>
+                              </div>
                           </div>
                         </div>
                         <% } %>

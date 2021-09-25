@@ -228,3 +228,8 @@ body{
     display: flex;
     justify-content: flex-end;
 }
+a:link, a:visited{
+    color:white;
+    cursor:pointer;
+    text-decoration: none;
+}

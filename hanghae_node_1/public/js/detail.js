@@ -32,8 +32,22 @@ function canModal(){
   deleteModal.classList.add('hidden');
 }
 //댓글달기
+let count =0;
 function commentModal(i){
-  commentModal[i].classList.remove('hiddenComment')
+  // if(count %2 == 0){
+  //   commentForm2[i].classList.remove('hidden');
+  //   count++
+  // }else if(count %2 == 1){
+  //   commentForm2[i].classList.add('hidden');
+  //   count++
+  // }
+  // if($('.comment2')[i].hasClass('hidden')){
+  //   $('.comment2')[i].removeClass('hidden')
+  // }else{
+  //   $('.comment2')[i].addClass('hidden');
+  // }
+//   $('.comment2')[i].toggleClass('hidden');
+commentForm2[i].classList.toggle('hidden')
 }
 
 
@@ -78,6 +92,7 @@ async function comment(){
     // helpComment.innerHTML="";
   }
 }
+//대댓기능
 
 //이벤트추가
 submitComment.addEventListener('submit', comment)
