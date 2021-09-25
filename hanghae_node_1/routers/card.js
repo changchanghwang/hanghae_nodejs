@@ -1,9 +1,12 @@
 const express = require('express');
-const cards = require('../schemas/cards')
+const cards = require('../schemas/cards');
+const comments = require('../schemas/comment');
 const router = express.Router();
 
 router.post('/submit',async(req,res)=>{
     const { title, desc, author, pw } = req.body;
+    console.log(req.body);
+    console.log(title);
     const date = new Date();
     let now = date.toLocaleString();
     const submitTime = date.getTime();
@@ -14,21 +17,22 @@ router.post('/submit',async(req,res)=>{
 router.get('/detail/:cardId', async(req, res)=>{
     const {cardId} = req.params;
     const card = await cards.findOne({"_id":cardId});
-    console.log(card)
     res.send({card:card})
 })
 
 router.patch('/detail/:cardId', async(req, res)=>{
     const {cardId} = req.params;
-    console.log(cardId);
     const {pw, title, desc, author} = req.body;
-    console.log(cardId, pw);
     const cardsExist = await cards.find({'_id':cardId, pw:pw})
     if(cardsExist.length > 0){
         await cards.updateOne({'_id':cardId},{$set:{title, desc, author}})
+        const card = await cards.find({'_id':cardId})
+        res.send({result:"success", card:card})
+    }else{
+        res.send({
+            result:"fail"
+        })
     }
-    const card = await cards.find({'_id':cardId})
-    res.send({result:"success", card:card})
 })
 
 router.delete('/detail/:cardId', async(req, res)=>{
@@ -37,6 +41,7 @@ router.delete('/detail/:cardId', async(req, res)=>{
     const cardExist = await cards.find({"_id":cardId, "pw":pw});
     if(cardExist.length >0){
         await cards.deleteOne({"_id":cardId});
+        await comments.deleteMany({"cardId":cardId});
         res.send({result:"success"})
     }
 })

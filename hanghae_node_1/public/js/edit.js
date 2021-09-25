@@ -28,6 +28,9 @@ async function submitEdit(){
   if(data.result === "success"){
     alert('수정완료!')
     window.location.href = `/detail?cardId=${cardId}`
+  }else{
+    alert('비밀번호를 확인해주세요')
+    window.location.href = `/edit?cardId=${cardId}`
   }
 }
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hwang's HangHae blog</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script defer src="/js/signup.js"></script>
+</head>
+<body>
+    <div class="top" onclick="window.location.href='/'">
+        <h1>Hwang's HangHae blog</h1>
+    </div>
+    <div class="menu">
+        <a href="/"><div>게시글 보기</div></a>
+        <a href="/submit"><div>게시글 등록</div></a>
+    </div>
+    <div class="sub_wrap">
+        <div class="content">
+            <h2>등록하기</h2>
+        </div>
+        <div>
+            <input type="text" name="title" class="sb_title" placeholder="제목을 입력해주세요">
+        </div>
+        <div>
+            <input type="text" name="desc" class="sb_desc" placeholder="설명을 입력해주세요">
+        </div>
+        <div class="flex">
+            <input type="text" name="author" class="sb_author" placeholder="작성자">
+            <input type="password" name="password" class="sb_password" placeholder="비밀번호">
+        </div>
+        <button class="submit_btn">등록하기</button>
+        <a href="/"><button>취소</button></a>
+    </div>
+</body>
+</html>

@@ -137,6 +137,9 @@ body{
 .hidden{
     display: none;
 }
+.hiddenComment{
+    display: none;
+}
 
 /* .modalWrap{
     background-color: white;
@@ -178,4 +181,50 @@ body{
   border: 0;
   border-radius: 3px;
   background-color: #000;
+}
+.commentForm{
+    width: 500px;
+    height: 100px;
+}
+.commentInput{
+ width: 80%;
+ height: 96px;
+}
+.submitComment{
+    width: 15%;
+    height: 99px;
+}
+.helpComment{
+    font-size:14px;
+}
+.commentWrap{
+    margin-top:20px;
+    width: 500px;
+}
+.comment{
+    display:flex;
+    width: 500px;
+    justify-content: space-between;
+}
+.com{
+    font-size:15px;
+    max-width:400px;
+}
+.date{
+    font-size:10px;
+}
+.warn{
+    color:red;
+}
+.signForm{
+    display:flex;
+    width:200px;
+    position: relative;
+    right: 0px;
+    justify-self:end;
+    justify-content: space-around;
+}
+.signWrap{
+    display: flex;
+    justify-content: flex-end;
 }
