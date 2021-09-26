@@ -41,7 +41,7 @@ router.delete('/detail/:cardId', async(req, res)=>{
     const cardExist = await cards.find({"_id":cardId, "pw":pw});
     if(cardExist.length >0){
         await cards.deleteOne({"_id":cardId});
-        await comments.deleteMany({"cardId":cardId});
+        // await comments.deleteMany({"cardId":cardId});
         res.send({result:"success"})
     }
 })

@@ -7,4 +7,8 @@ router.get('/', async(req,res)=>{
     res.render('home',{card})
 })
 
+router.get('/submit', (req,res)=>{
+    res.render('submit')
+})
+
 module.exports = router;

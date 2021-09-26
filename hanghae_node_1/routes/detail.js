@@ -12,23 +12,16 @@ router.post('/', async(req,res,next)=>{
         const date = new Date();
         let now = date.toLocaleString();
         const submitTime = date.getTime();
-        await comments.create({comment:comment, cardId:cardId, date:now,submitTime:submitTime,commentDepth:commentDepth});
+        const commentNumber = await comments.find({}).count();
+        await comments.create({comment:comment, cardId:cardId, date:now,submitTime:submitTime,commentDepth:commentDepth, commentNumber:commentNumber});
         res.send({result:'success'});
     }
 })
 
 router.get('/', async(req, res)=>{
     const {cardId} = req.query;
-    console.log(req.query);
     card = await cards.findOne({_id:cardId})
     const ment = await comments.find({cardId:cardId});
-    let pipeline = []
-    // pipeline.push(
-    //     {
-
-    //     }
-    // )
-    // await comments.
     res.render('detail', {card, ment})
 })
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hwang's HangHae blog</title>
     <link rel="stylesheet" href="/css/style.css">
-    <script defer src="/js/signup.js"></script>
+    <script defer src="/js/signin.js"></script>
 </head>
 <body>
     <div class="top" onclick="window.location.href='/'">
@@ -18,19 +18,18 @@
     </div>
     <div class="sub_wrap">
         <div class="content">
-            <h2>회원가입</h2>
+            <h2>로그인</h2>
         </div>
-        <div>
-            ID: <input type="text" name="title" class="idInput" placeholder="아이디를 입력해주세요">
-        </div>
-        <div>
-            PW: <input type="password" name="desc" class="pwInput" placeholder="비밀번호를 입력해주세요">
-        </div>
-        <div>
-            PW_Check: <input type="password" name="password" class="pwCheckInput" placeholder="비밀번호 재확인">
-        </div>
-        <button class="signUpBtn">회원가입</button>
-        <a href="/"><button>취소</button></a>
+        <form class="signInForm" method="POST">
+            <div>
+                ID: <input type="text" name="id" class="idInput" placeholder="아이디를 입력해주세요">
+            </div>
+            <div>
+                PW: <input type="password" name="pw" class="pwInput" placeholder="비밀번호를 입력해주세요">
+            </div>
+            <button class="signInBtn">로그인</button>
+            <a href="/"><button>취소</button></a>
+        </form>
     </div>
 </body>
 </html>

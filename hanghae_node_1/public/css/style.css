@@ -233,3 +233,6 @@ a:link, a:visited{
     cursor:pointer;
     text-decoration: none;
 }
+.toSignup, .toSignin{
+    color:#000 !important;
+}
