@@ -27,23 +27,9 @@ const commentsSchema = new Schema({
         type:Number,
         default:0
     },
-},
-// {toObject:{virtuals:true}, toJSON:{virtuals: true}}
-// );
-// commentsSchema.virtual('comments',{
-//     ref: 'comment',
-//     localField: '_id',
-//     foreignField: 'parentComment',
-// });
-
-// commentsSchema
-//     .virtual('childComments')
-//     .get(function(){
-//         return this._childComments;
-//     })
-//     .set(function(v){
-//         this._childComments == v;
-//     }
-)
+    commentNumber:{
+        type:Number,
+    }
+})
 
 module.exports = mongoose.model("comment", commentsSchema);

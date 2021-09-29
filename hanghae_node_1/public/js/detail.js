@@ -65,6 +65,9 @@ async function del(){
   if(data["result"] =="success"){
     alert("삭제 완료!");
     window.location.href ="/";
+  }else{
+    alert("틀렸다. 너. 비밀번호.")
+    window.location.href ="/"
   }
 }
 
