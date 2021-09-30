@@ -23,9 +23,13 @@ router.route('/detail/:cardId')
         res.send({card:card})
     })
     .patch(async(req,res)=>{
-        const {cardId} = req.params;
+        const {cardId} = await req.query;
+        console.log(req.query);
         const {pw, title, desc, author} = req.body;
+        console.log(req.body);
+        console.log(pw, title, desc, author)
         const cardsExist = await cards.find({'_id':cardId, pw:pw})
+        console.log(cardsExist);
         if(cardsExist.length > 0){
             await cards.updateOne({'_id':cardId},{$set:{title, desc, author}})
             res.send({result:"success"})
