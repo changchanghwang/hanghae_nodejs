@@ -124,7 +124,6 @@ router.get('/goods', authMiddleware, async (req, res) => {
         const { category } = req.query;
         console.log(req.query);
         console.log(typeof req.query);
-
         const goods = await Goods.findAll({
             order: [['goodsId', 'DESC']],
             where: category ? { category } : undefined,

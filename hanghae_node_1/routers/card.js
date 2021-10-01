@@ -14,8 +14,6 @@ router.post('/submit',async(req,res)=>{
     res.send({result:"success"});
 })
 
-
-
 router.route('/detail/:cardId')
     .get(async(req,res)=>{
         const {cardId} = req.params;
