@@ -8,22 +8,11 @@ const passwordCheck = document.getElementsByClassName('passwordCheck')[0];
 const cancelBtn = document.getElementsByClassName('del-close-btn')[0];
 const submitComment = document.getElementsByClassName('commentForm')[0];
 const commentInput = document.getElementsByClassName('commentInput')[0];
-const commentForm2 = document.getElementsByClassName('commentForm2');
-const commentInput2 = document.getElementsByClassName('commentInput2');
-const submitComment2 = document.getElementsByClassName('submitComment2');
-const comments = document.getElementsByClassName('comment');
-const commentDepths = document.getElementsByClassName('commentDepth');
-
-// for(let commentDepth of commentDepths){
-//   console.log(commentDepth.value);
-// }
-// for(let comment of comments){
-//   console.log(comment.id);
-// }
+const commentWrap = document.getElementsByClassName('commentWrap')[0];
+const editInput = document.getElementsByClassName('editInputWrap');
 
 const url = new URLSearchParams(window.location.search);
 const cardId = url.get('cardId');
-
 //삭제확인 모달창
 function delModal(){
   deleteModal.classList.remove('hidden');
@@ -31,30 +20,12 @@ function delModal(){
 function canModal(){
   deleteModal.classList.add('hidden');
 }
-//댓글달기
-let count =0;
-function commentModal(i){
-  // if(count %2 == 0){
-  //   commentForm2[i].classList.remove('hidden');
-  //   count++
-  // }else if(count %2 == 1){
-  //   commentForm2[i].classList.add('hidden');
-  //   count++
-  // }
-  // if($('.comment2')[i].hasClass('hidden')){
-  //   $('.comment2')[i].removeClass('hidden')
-  // }else{
-  //   $('.comment2')[i].addClass('hidden');
-  // }
-//   $('.comment2')[i].toggleClass('hidden');
-commentForm2[i].classList.toggle('hidden')
-}
 
 
 //삭제
 async function del(){
   let pw = passwordCheck.value;
-  let res = await fetch(`/api/detail/${cardId}`, {
+  let res = await fetch(`/detail/del/${cardId}`, {
     method:"DELETE",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
@@ -65,16 +36,19 @@ async function del(){
   if(data["result"] =="success"){
     alert("삭제 완료!");
     window.location.href ="/";
-  }else{
+  }else if(data.result =='Fail'){
     alert("틀렸다. 너. 비밀번호.")
-    window.location.href ="/"
+    window.location.href ="/";
+  }else if(data.result =='Error'){
+    alert("로그인 해주세요.")
+    window.location.href ="/user/signin";
   }
 }
 
 //댓글기능
 async function comment(){
   let comments = commentInput.value;
-  let res = await fetch('/detail', {
+  let res = await fetch('/comment', {
     method:'POST',
     headers:{'Content-Type':"application/json"},
     body:JSON.stringify({
@@ -83,19 +57,66 @@ async function comment(){
     })
   })
   let data = await res.json();
-  console.log(data.result);
-  if(data.result =="error"){
+  if(data.result =="Error"){
+    alert("로그인을 해주세요");
+    window.location.href = "/user/signin";
+  }else if(data.result =="Fail"){
     alert("내용을 입력해주세요");
-    return
-    // helpComment.classList.add('warn');
-    // helpComment.innerHTML="내용을 입력해주세요";
+    return;
   }else{
     window.location.href=`/detail?cardId=${cardId}`
-    // helpComment.classList.remove('warn');
-    // helpComment.innerHTML="";
   }
 }
-//대댓기능
+//댓글 편집 모달
+function editComment(id){
+  document.getElementsByClassName(id)[0].classList.toggle('hidden');
+  document.getElementsByClassName(id)[1].classList.toggle('hidden');
+}
+
+//댓글 편집 기능
+async function editCommentApi(id){
+  let comment = document.getElementById(id).value;
+  let commentId = id;
+  let res = await fetch('/comment',{
+    method:'PATCH',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      comment:comment,
+      commentId:commentId,
+    })
+  })
+  let data = await res.json();
+  console.log(data.result);
+  if(data.result == "success"){
+    window.location.href =`/detail?cardId=${cardId}`;
+  }else if(data.result == "Fail"){
+    alert("댓글을 입력해주세요.");
+    return;
+  }
+} 
+
+//댓글 삭제 모달
+function deleteCommentModal(id){
+  document.getElementsByClassName(id)[2].classList.toggle('hidden');
+}
+
+//댓글 삭제 기능
+async function deleteComment(id){
+  let commentId = id;
+  let res = await fetch('/comment', {
+    method:'DELETE',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      commentId:commentId,
+    })
+  })
+  let data = await res.json();
+  if(data.result =="success"){
+    window.location.href =`/detail?cardId=${cardId}`;
+  }else{
+    alert('오류');
+  }
+}
 
 //이벤트추가
 submitComment.addEventListener('submit', comment)

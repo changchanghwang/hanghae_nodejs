@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hwang's HangHae blog</title>
     <link rel="stylesheet" href="/css/style.css">
+    <script defer src="/js/home.js"></script>
 </head>
 <body>
     <div class="top" onclick="window.location.href='/'">
@@ -13,13 +14,17 @@
     </div>
     <div class="signWrap">
         <div class="signForm">
-            <a class="toSignin" href="/user/signin"><div>로그인</div></a>
-            <a class="toSignup" href="/user/signup"><div>회원가입</div></a>
+            <% if(id ==="") {%>
+                <a class="toSignin" href="/user/signin"><div>로그인</div></a>
+                <a class="toSignup" href="/user/signup"><div>회원가입</div></a>
+            <%} else {%>
+                <div class="toLogout">로그아웃</div>
+            <%} %>
         </div>
     </div>
     <div class="menu">
         <a href="/"><div>게시글 보기</div></a>
-        <a href="/submit"><div>게시글 등록</div></a>
+        <a href="/card"><div>게시글 등록</div></a>
     </div>
     <section class="cardCloumn" id="card_list">
         <div class="cardRow2">

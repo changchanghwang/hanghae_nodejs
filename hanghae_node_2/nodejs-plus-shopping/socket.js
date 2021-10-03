@@ -41,6 +41,7 @@ function initSocket(sock) {
         },
         watchChange: () => {
             watchEvent('CHANGED_PAGE', (data) => {
+                // console.log(data);
                 // socketIdMap[sock.id]=data;
                 // emitSamePageViewersCount()
                 sock.emit('SAME_PAGE_VIEWER_COUNT', io.engine.clientsCount);

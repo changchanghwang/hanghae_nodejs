@@ -15,6 +15,10 @@ const commentsSchema = new Schema({
         type:String,
         required:true
     },
+    author:{
+        type:String,
+        required:true,
+    },
     submitTime:{
         type:Number,
         required:true
@@ -29,7 +33,14 @@ const commentsSchema = new Schema({
     },
     commentNumber:{
         type:Number,
-    }
+    },
+    edited:{
+        type:Boolean,
+        default:false,
+    },
+    editedTime:{
+        type:String,
+    },
 })
 
 module.exports = mongoose.model("comment", commentsSchema);

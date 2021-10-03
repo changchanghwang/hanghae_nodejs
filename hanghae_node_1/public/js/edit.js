@@ -13,7 +13,7 @@ async function submitEdit(){
   let desc = descInput.value;
   let author = authorInput.value;
     console.log(author)
-  let res = await fetch(`/api/detail/${cardId}`,{
+  let res = await fetch(`/edit/edt/${cardId}`,{
     method:"PATCH",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({

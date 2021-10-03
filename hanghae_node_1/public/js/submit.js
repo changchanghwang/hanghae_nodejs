@@ -10,7 +10,7 @@ async function submitCard(){
     let author = authorInput.value;
     let pw = pwInput.value;
 
-    let res = await fetch('/api/submit',{
+    let res = await fetch('/card/submit',{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body: JSON.stringify({

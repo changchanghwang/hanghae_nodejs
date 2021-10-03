@@ -14,7 +14,7 @@
     </div>
     <div class="menu">
       <a href="/"><div>게시글 보기</div></a>
-      <a href="/submit"><div>게시글 등록</div></a>
+      <a href="/card"><div>게시글 등록</div></a>
     </div>
     <h3 class="menu_d">상세페이지</h3>
     <section class="cardCloumn_d" id="card_list">
@@ -43,20 +43,48 @@
                           <button  class="submitComment">등록하기</button>
                         </form>
                         <% for(let i=0; i < ment.length; i++) { %>
-                        <div class="commentWrap" style="margin-left:50*'<%= ment[i].commentDepth %>'px;">
+                        <div class="commentWrap <%= ment[i]._id%>" style="margin-left:50*'<%= ment[i].commentDepth %>'px;">
                           <div class="commentFlex">
-                            <div class="comment  <%= ment[i].parentComment %>" id="<%= ment[i]._id %>" >
-                              <input class="commentDepth" type="hidden" name="commentDepth" value=" <%= ment[i].commentDepth %>">
-                              <div class="com"><%= ment[i].comment %></div>
-                              <div class="date">작성 날짜: <%= ment[i].date %></div>
-                            </div>
-                            <button class="comment2" onclick= "commentModal('<%= i %>')">댓글</button>
-                              <div class="commentForm2 hidden">
-                                <input type="text" name="comment2" class="commentInput">
-                                <button class="submitComment2" onclick= "subComment('<%= ment[i].commentDepth %>', '<%= ment[i]._id %>')">등록하기</button>
+                            <div class="comment ">
+                                <div class="com"><%= ment[i].comment %></div>
+                              <div class="dateWrap">
+                                <div class="date">작성 날짜: <%= ment[i].date %></div>
+                                <% if(ment[i].edited) {%>
+                                  <div class="date_E">수정됨(<%= ment[i].editedTime %>)</div>
+                                <%}%>
                               </div>
+                            </div>
+                            <div class="flexComment">
+                              <div>작성자: <%= ment[i].author %></div>
+                              <% if(ment[i].author == id ) {%>
+                                <div class="flexEditComment">
+                                  <div class="editComment editStyle" onclick="editComment('<%= ment[i]._id %>')">편집</div>|
+                                  <div class="deleteComment editStyle" onclick="deleteCommentModal('<%= ment[i]._id %>')">삭제</div>
+                                </div>
+                              <% } %>
+                            </div>
                           </div>
                         </div>
+                        <div class="editInputWrap <%= ment[i]._id%> hidden">
+                          <div class="editInputWrap2">
+                            <input class="editCommentInput" type="text" value="<%= ment[i].comment %>" id="<%= ment[i]._id %>">
+                            <button class="editCommentBtn" type="button" onclick="editCommentApi('<%= ment[i]._id%>')">수정하기</button>
+                          </div>
+                        </div>
+
+                        <div class="del-background2 hidden <%= ment[i]._id%>">
+                          <div class="del-wrap2">
+                            <section class="del-content2">
+                                <div class="flex-layout-between2">
+                                    <h3>정말 삭제하시겠습니까?</h3>
+                                    <div class="option">
+                                      <button class="del-submit-btn2" onclick="deleteComment('<%= ment[i]._id %>')">예</button>
+                                      <button class="del-close-btn2" onclick="deleteCommentModal('<%= ment[i]._id %>')">닫기</button>
+                                    </div>
+                                </div>
+                            </section>
+                          </div>
+                        </div>  
                         <% } %>
                     </div>
                 </div>
@@ -73,12 +101,16 @@
               <div>
                 <input type="password" placeholder="비밀번호를 입력해주세요" class="passwordCheck">
               </div>
-              <button class="del-submit-btn">예</button>
-              <button class="del-close-btn">닫기</button>
+              <div class="option">
+                <button class="del-submit-btn">예</button>
+                <button class="del-close-btn">닫기</button>
+              </div>
           </div>
       </section>
     </div>
   </div>  
+
+  
 
 </body>
 </html>

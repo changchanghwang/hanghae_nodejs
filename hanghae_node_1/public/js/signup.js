@@ -13,7 +13,8 @@ async function signup(){
         headers:{'Content-Type':"application/json"},
         body:JSON.stringify({
             id:id,
-            pw:pw
+            pw:pw,
+            pwCheck:pwCheck
         })
     })
     let data = await res.json();
@@ -23,7 +24,7 @@ async function signup(){
         alert('회원가입을 축하드립니다.')
         window.location.href = "/user/signin";
     }else{
-        alert('중복된 아이디입니다')
+        alert(data.msg)
         return;
     }
 }
