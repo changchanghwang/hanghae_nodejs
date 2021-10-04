@@ -3,7 +3,6 @@ const pwInput = document.getElementsByClassName('pwInput')[0];
 const signInBtn = document.getElementsByClassName('signInBtn')[0];
 const signInForm = document.getElementsByClassName('signInForm')[0];
 
-console.log(signInBtn);
 async function signIn(event){
     event.preventDefault();
     let id = idInput.value;

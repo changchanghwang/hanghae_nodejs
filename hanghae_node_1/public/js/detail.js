@@ -64,7 +64,7 @@ async function comment(){
     alert("내용을 입력해주세요");
     return;
   }else{
-    window.location.href=`/detail?cardId=${cardId}`
+    window.location.reload();
   }
 }
 //댓글 편집 모달
@@ -88,7 +88,7 @@ async function editCommentApi(id){
   let data = await res.json();
   console.log(data.result);
   if(data.result == "success"){
-    window.location.href =`/detail?cardId=${cardId}`;
+    window.location.reload();
   }else if(data.result == "Fail"){
     alert("댓글을 입력해주세요.");
     return;
@@ -112,7 +112,7 @@ async function deleteComment(id){
   })
   let data = await res.json();
   if(data.result =="success"){
-    window.location.href =`/detail?cardId=${cardId}`;
+    window.location.reload();
   }else{
     alert('오류');
   }

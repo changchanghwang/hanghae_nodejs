@@ -2,13 +2,13 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 module.exports = {
-    generateAccessToken: (id) => {
+    generateAccessToken(id){
         return jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, {
             algorithm: 'HS512',
             expiresIn: '50m',
         });
     },
-    authToken: (req, res, next) => {
+    authToken(req, res, next){
         const cookie = req.cookies.login_token;
         if (cookie === undefined) {
             res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
@@ -24,7 +24,7 @@ module.exports = {
             }
         }
     },
-    authTokenForSend: (req, res, next) => {
+    authTokenForSend(req, res, next){
         const cookie = req.cookies.login_token;
         if (cookie === undefined) {
             res.send({ result: 'Error' });

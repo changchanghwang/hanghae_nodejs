@@ -1,5 +1,4 @@
 const Http = require('http');
-const socketIo = require('socket.io');
 const express = require('express');
 const { Op } = require('sequelize');
 const { User, Goods, Cart } = require('./models');
