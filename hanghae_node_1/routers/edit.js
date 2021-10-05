@@ -1,10 +1,10 @@
 const express = require('express');
 const cards = require('../models/cards');
 const router = express.Router();
-const tokenController = require('./controllers/token');
+const loginAuth = require('../middlewares/loginAuth');
 
 //페이지 랜더링
-router.get('/', tokenController.authToken, async (req, res) => {
+router.get('/', loginAuth.authToken, async (req, res) => {
     const { cardId } = req.query;
     card = await cards.findOne({ _id: cardId });
     res.render('edit', { card });

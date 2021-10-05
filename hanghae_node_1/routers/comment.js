@@ -1,12 +1,12 @@
 const express = require('express');
 const comments = require('../models/comment');
 const router = express.Router();
-const tokenController = require('./controllers/token');
+const loginAuth = require('../middlewares/loginAuth');
 const jwt = require('jsonwebtoken');
 
 router
     .route('/')
-    .post(tokenController.authTokenForSend, async (req, res) => {
+    .post(loginAuth.authTokenForSend, async (req, res) => {
         const { comment, cardId, commentDepth } = req.body;
         const author = req.userInfo.id;
         if (comment === '') {
@@ -26,7 +26,7 @@ router
             res.send({ result: 'success' });
         }
     })
-    .patch(tokenController.authTokenForSend, async (req, res) => {
+    .patch(loginAuth.authTokenForSend, async (req, res) => {
         const { comment, commentId } = req.body;
         const date = new Date();
         const editedTime = date.toLocaleString();
@@ -41,7 +41,7 @@ router
             res.send({ result: 'success' });
         }
     })
-    .delete(tokenController.authTokenForSend, async (req, res, next) => {
+    .delete(loginAuth.authTokenForSend, async (req, res, next) => {
         const { commentId } = req.body;
         const commentExist = await comments.find({ _id: commentId });
         try {

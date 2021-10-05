@@ -2,7 +2,7 @@ const express = require('express');
 const cards = require('../models/cards');
 const comments = require('../models/comment');
 const router = express.Router();
-const tokenController = require('./controllers/token');
+const loginAuth = require('../middlewares/loginAuth');
 const jwt = require('jsonwebtoken');
 
 router.route('/').get(async (req, res) => {
@@ -27,7 +27,7 @@ router.route('/').get(async (req, res) => {
 
 router.delete(
     '/del/:cardId',
-    tokenController.authTokenForSend,
+    loginAuth.authTokenForSend,
     async (req, res) => {
         const { cardId } = req.params;
         console.log(req.params);

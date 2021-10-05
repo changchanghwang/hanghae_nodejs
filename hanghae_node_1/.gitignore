@@ -1,2 +1,8 @@
 node_modules
 .idea
+logs
+coverage
+.vscode
+winston.js
+.env
+jest.config.js

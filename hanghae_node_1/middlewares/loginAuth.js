@@ -2,13 +2,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 module.exports = {
-    generateAccessToken(id){
-        return jwt.sign({ id }, process.env.ACCESS_TOKEN_SECRET, {
-            algorithm: 'HS512',
-            expiresIn: '50m',
-        });
-    },
-    authToken(req, res, next){
+    authToken(req, res, next) {
         const cookie = req.cookies.login_token;
         if (cookie === undefined) {
             res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
@@ -24,17 +18,20 @@ module.exports = {
             }
         }
     },
-    authTokenForSend(req, res, next){
+    authTokenForSend(req, res, next) {
         const cookie = req.cookies.login_token;
         if (cookie === undefined) {
             res.send({ result: 'Error' });
         } else {
             try {
-                req.userInfo = jwt.verify(cookie, process.env.ACCESS_TOKEN_SECRET);
+                req.userInfo = jwt.verify(
+                    cookie,
+                    process.env.ACCESS_TOKEN_SECRET
+                );
                 next();
             } catch (error) {
                 next(error);
             }
         }
     },
-};
+}

@@ -10,14 +10,18 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.7",
-    "pug": "^3.0.2"
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
   },
   "devDependencies": {
     "jest": "^27.2.4",
     "supertest": "^6.1.6"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "author": "",
   "license": "ISC"
