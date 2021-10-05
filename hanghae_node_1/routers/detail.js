@@ -4,6 +4,7 @@ const comments = require('../models/comment');
 const router = express.Router();
 const loginAuth = require('../middlewares/loginAuth/loginAuth');
 const jwt = require('jsonwebtoken');
+const likes = require('../models/likes');
 
 router.route('/').get(async (req, res) => {
     const { cardId } = req.query;
@@ -30,15 +31,15 @@ router.delete(
     loginAuth.authTokenForSend,
     async (req, res) => {
         const { cardId } = req.params;
-        console.log(req.params);
         const { pw } = req.body;
         const cardExist = await cards.find({ _id: cardId, pw: pw });
         if (cardExist.length) {
             await cards.deleteOne({ _id: cardId });
             await comments.deleteMany({ cardId: cardId });
+            await likes.deleteMany({cardId});
             res.send({ result: 'success' });
         } else {
-            res.send({ result: 'fail' });
+            res.send({ result: 'Fail' });
         }
     }
 );

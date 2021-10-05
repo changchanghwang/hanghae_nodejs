@@ -25,6 +25,10 @@ const cardSchema = new Schema({
     date:{
         type:String,
         required:true
+    },
+    like:{
+        type:Number,
+        default:0,
     }
 })
 

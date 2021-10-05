@@ -23,3 +23,8 @@ exports.signupPost = async (req, res) => {
         });
     }
 };
+
+//test db -> db 조회해서 해야 될때
+//mock -> db에 생성해야 된다거나 할때
+
+//api 관리

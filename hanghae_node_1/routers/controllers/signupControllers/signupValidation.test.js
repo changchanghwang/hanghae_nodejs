@@ -1,10 +1,11 @@
 const { idAuth, pwAuth } = require('./signupValidation');
 
-test('아이디는 영어 대소문자, 숫자만 가능하고 3글자 이상이어야한다.성공', () => {
+test('아이디는 영어 대소문자,한글(초성x), 숫자만 가능하고 3글자 이상이어야한다.성공', () => {
     expect(idAuth('aA1')).toEqual(true);
     expect(idAuth('aaaa')).toEqual(true);
     expect(idAuth('AAAAA')).toEqual(true);
     expect(idAuth('111111')).toEqual(true);
+    expect(idAuth('황창환')).toEqual(true);
 });
 
 test('비밀번호는 영어 대소문자,숫자만 가능하고 4글자 이상이며 비밀번호 재확인 값과 일치하고 아이디가 포함되지 않은 값이어야 한다.', () => {
@@ -14,14 +15,16 @@ test('비밀번호는 영어 대소문자,숫자만 가능하고 4글자 이상�
     expect(pwAuth('aA1', '2222', '2222')).toEqual(true);
 });
 
-test('아이디는 영어 대소문자,숫자만 가능하고 3글자 이상이어야한다.실패', () => {
+test('아이디는 영어 대소문자,한글(초성x),숫자만 가능하고 3글자 이상이어야한다.실패', () => {
     expect(idAuth('')).toEqual(false);
     expect(idAuth('a')).toEqual(false);
     expect(idAuth('A')).toEqual(false);
     expect(idAuth('1')).toEqual(false);
+    expect(idAuth('황')).toEqual(false);
     expect(idAuth('aA')).toEqual(false);
     expect(idAuth('a1')).toEqual(false);
     expect(idAuth('A1')).toEqual(false);
+    expect(idAuth('황창')).toEqual(false);
     expect(idAuth('!aA1!')).toEqual(false);
     expect(idAuth('aㅁa')).toEqual(false);
     expect(idAuth('ㅁㅁㅁ')).toEqual(false);

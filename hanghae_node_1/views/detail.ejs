@@ -38,7 +38,7 @@
                         </div>
                         <hr/>
                         <form class="commentForm" onsubmit="return false;">
-                          <input type="text" name="comment" class="commentInput">
+                          <textarea type="text" name="comment" class="commentInput"></textarea>
                           <input type="hidden" name="cardId" value=<%= card._id %>>
                           <button  class="submitComment">등록하기</button>
                         </form>
@@ -69,6 +69,7 @@
                           <div class="editInputWrap2">
                             <input class="editCommentInput" type="text" value="<%= ment[i].comment %>" id="<%= ment[i]._id %>">
                             <button class="editCommentBtn" type="button" onclick="editCommentApi('<%= ment[i]._id%>')">수정하기</button>
+                            <button class="cancelEditComment" type="button" onclick="window.location.reload();">취소</button>
                           </div>
                         </div>
 

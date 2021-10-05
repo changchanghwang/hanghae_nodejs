@@ -1,13 +1,11 @@
 const titleInput = document.getElementsByClassName('sb_title')[0];
 const descInput = document.getElementsByClassName('sb_desc')[0];
 const submitBtn = document.getElementsByClassName('submit_btn')[0];
-const authorInput = document.getElementsByClassName('sb_author')[0];
 const pwInput = document.getElementsByClassName('sb_password')[0];
 
 async function submitCard(){
     let title = titleInput.value;
     let desc = descInput.value;
-    let author = authorInput.value;
     let pw = pwInput.value;
 
     let res = await fetch('/card/submit',{
@@ -16,7 +14,6 @@ async function submitCard(){
         body: JSON.stringify({
             title:title,
             desc:desc,
-            author:author,
             pw:pw
         })
     })

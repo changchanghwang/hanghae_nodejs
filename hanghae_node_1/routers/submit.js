@@ -7,8 +7,9 @@ router.get('/', loginAuth.authTokenForRender, (req, res) => {
     res.render('submit');
 });
 
-router.post('/submit', async (req, res) => {
-    const { title, desc, author, pw } = req.body;
+router.post('/submit',loginAuth.authTokenForSend, async (req, res) => {
+    const { title, desc, pw } = req.body;
+    const author = req.userInfo.id
     const date = new Date();
     let now = date.toLocaleString();
     const submitTime = date.getTime();

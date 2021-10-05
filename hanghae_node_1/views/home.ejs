@@ -29,11 +29,11 @@
     <section class="cardCloumn" id="card_list">
         <div class="cardRow2">
             <% for(let i=0; i < card.length; i++) {%>
-                <div class="ListBg" onclick="location.href=`/detail?cardId=<%= card[i]._id %>`">
+                <div class="ListBg">
                     <!-- onclick="location.href='/detail?goodsId=${item["goodsId"]}'" -->
                     <div class="ListFlex">
                         <div class="click-wrap">
-                            <div class="imgHidden-box">
+                            <div class="imgHidden-box" onclick="location.href=`/detail?cardId=<%= card[i]._id %>`"">
                                 <img src="/img/linkgather.png" class="classImg">
                                 <h3 class="title"> <%= card[i].title %> </h3>
                                 <h4 class="desc"><%= card[i].desc %></h4>
@@ -42,6 +42,10 @@
                                 <span class="time">작성시간: <%= card[i].date %></span>
                                 </div>
                                 <hr/>
+                            </div>
+                            <div class="likeWrap" onclick="like('<%= card[i]._id %>')">
+                                <img src="/img/likeUp3.png"> 
+                                <span class="likeText">좋아요: <%= card[i].like %></span>
                             </div>
                         </div>
                     </div>

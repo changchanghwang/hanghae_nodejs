@@ -37,7 +37,6 @@ body{
     width:300px;
     margin-bottom: 32px;
     border-radius: 5px;
-    cursor: pointer;
 }
 .classImg{
     width:300px;
@@ -114,6 +113,9 @@ body{
 .classImg_d{
     width:500px;
 }
+.imgHidden-box{
+    cursor: pointer;
+}
 .ListFlex_d .title_d .desc_d {
     font-size: 14px;
     font-weight: normal;
@@ -188,6 +190,7 @@ body{
     justify-content:space-between;
 }
 .commentForm{
+    display: flex;
     width: 500px;
     height: 100px;
 }
@@ -269,14 +272,31 @@ a:link, a:visited{
     margin-top: 20px;
 }
 .editCommentInput{
-    width:80%;
+    width:70%;
 }
 .editCommentBtn{
     width:20%;
+}
+.cancelEditComment{
+    width:10%;
 }
 .dateWrap{
     text-align: end;
 }
 .date_E{
     font-size: 10px;
+}
+.likeWrap{
+    border: 1px solid;
+    display: flex;
+    position: relative;
+    border-radius: 3px;
+    width: 40%;
+    margin: auto;
+    cursor: pointer;
+}
+.likeText{
+    position:absolute;
+    top: 20%;
+    left: 30%;
 }

@@ -1,6 +1,6 @@
 module.exports = {
     idAuth(id) {
-        const idRegexp = /^[a-zA-Z0-9]{3,}$/;
+        const idRegexp = /^[a-zA-Z0-9가-힣]{3,}$/;
         const validatedId = idRegexp.test(id);
         if (!validatedId) {
             // console.log('아이디 형식에 맞춰주세요');
