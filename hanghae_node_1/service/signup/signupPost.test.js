@@ -2,6 +2,9 @@ jest.mock('../../models/user');
 const users = require('../../models/user');
 const { signupPost } = require('./signupPost');
 
+//db 접근하는 것이나 중복확인 test코드는 엉망진창이라서 다시해야됨.
+//테스트 db나 목을 구분지어서 사용해야 될 것 같음. mysql로 db 바꾸고 수정 예정
+
 test('아이디, 비밀번호, 비밀번호 재확인을 입력하고 가입하기를 누르면 response로 result:success를 보내준다.', async () => {
     let id = 'a1A';
     let pw = 'b2B2';
