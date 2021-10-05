@@ -1,9 +1,9 @@
 const express = require('express');
 const cards = require('../models/cards');
 const router = express.Router();
-const loginAuth = require('../middlewares/loginAuth');
+const loginAuth = require('../middlewares/loginAuth/loginAuth');
 
-router.get('/', loginAuth.authToken, (req, res) => {
+router.get('/', loginAuth.authTokenForRender, (req, res) => {
     res.render('submit');
 });
 

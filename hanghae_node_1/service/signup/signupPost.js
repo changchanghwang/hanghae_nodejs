@@ -5,7 +5,6 @@ exports.signupPost = async (req, res) => {
     const { id, pw, pwCheck } = req.body;
     if (signupAuth.idAuth(id) && signupAuth.pwAuth(id, pw, pwCheck)) {
         let isExist = await users.findOne({ id });
-        console.log(isExist);
         if (!isExist) {
             await users.create({ id, pw });
             res.send({

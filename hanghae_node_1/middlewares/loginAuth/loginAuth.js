@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 module.exports = {
-    authToken(req, res, next) {
+    authTokenForRender(req, res, next) {
         const cookie = req.cookies.login_token;
         if (cookie === undefined) {
             res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });

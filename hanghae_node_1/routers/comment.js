@@ -1,7 +1,7 @@
 const express = require('express');
 const comments = require('../models/comment');
 const router = express.Router();
-const loginAuth = require('../middlewares/loginAuth');
+const loginAuth = require('../middlewares/loginAuth/loginAuth');
 const jwt = require('jsonwebtoken');
 
 router

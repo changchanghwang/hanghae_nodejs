@@ -1,5 +1,5 @@
 jest.mock('../../models/user');
-const users = require('../../models/user')
+const users = require('../../models/user');
 const { signupPost } = require('./signupPost');
 
 test('아이디, 비밀번호, 비밀번호 재확인을 입력하고 가입하기를 누르면 response로 result:success를 보내준다.', async () => {
@@ -18,7 +18,7 @@ test('아이디, 비밀번호, 비밀번호 재확인을 입력하고 가입하�
         send: mockedSend,
     };
     const next = jest.fn();
-    await users.findOne.mockReturnValue(null)
+    await users.findOne.mockReturnValue(null);
     await signupPost(req, res, next);
     expect(mockedSend).toBeCalledWith({
         result: 'success',
@@ -41,10 +41,11 @@ test('아이디, 비밀번호, 비밀번호 재확인을 입력하고 가입하�
         send: mockedSend,
     };
     const next = jest.fn();
-    await users.findOne.mockReturnValue(Promise.resolve({
-        id:id,
-        
-    }))
+    await users.findOne.mockReturnValue(
+        Promise.resolve({
+            id: id,
+        })
+    );
     await signupPost(req, res, next);
     expect(mockedSend).toBeCalledWith({
         result: 'Fail',

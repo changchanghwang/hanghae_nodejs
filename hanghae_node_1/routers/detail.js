@@ -2,7 +2,7 @@ const express = require('express');
 const cards = require('../models/cards');
 const comments = require('../models/comment');
 const router = express.Router();
-const loginAuth = require('../middlewares/loginAuth');
+const loginAuth = require('../middlewares/loginAuth/loginAuth');
 const jwt = require('jsonwebtoken');
 
 router.route('/').get(async (req, res) => {
