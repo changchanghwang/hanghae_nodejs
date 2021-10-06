@@ -6,3 +6,4 @@ coverage
 winston.js
 .env
 jest.config.js
+config

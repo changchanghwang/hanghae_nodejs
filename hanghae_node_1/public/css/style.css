@@ -1,5 +1,5 @@
 body{
-    background-color: beige;
+    background-color: #eee;
 }
 .top{
     display: flex;
@@ -299,4 +299,17 @@ a:link, a:visited{
     position:absolute;
     top: 20%;
     left: 30%;
+}
+
+.flexView{
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+.forWidth{
+    width:80px;
+}
+
+.btnWrap{
+    margin:10px 0px;
 }

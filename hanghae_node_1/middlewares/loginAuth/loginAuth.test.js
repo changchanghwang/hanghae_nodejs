@@ -1,6 +1,8 @@
 const { authTokenForRender, authTokenForSend } = require('./loginAuth');
 const jwt = require('jsonwebtoken');
 
+
+
 test('랜더링라우터에서 로그인이 되어있지않으면 alert와 로그인페이지로 이동스크립트를 보내준다.', () => {
     const req = {
         cookies: {

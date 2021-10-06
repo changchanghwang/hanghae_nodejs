@@ -3,9 +3,15 @@ const express = require('express');
 const app = express();
 const logger = require('./winston');
 const morgan = require('morgan');
+const { sequelize } = require('./models/index');
 const cookieParser = require('cookie-parser');
-const connect = require('./models/index');
-connect();
+// const connect = require('./models/index');
+// connect();
+
+// // sequelize 초기화
+// sequelize.sync({force:false})
+//     .then(()=>console.log('데이터베이스 연결 성공!'))
+//     .catch((err)=>console.error(err));
 
 //라우팅
 const homeRouter = require('./routers/home');
@@ -21,11 +27,11 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 //로거
-const combined = ':remote-addr - :remote-user ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"' 
+const combined =
+    ':remote-addr - :remote-user ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 // 기존 combined 포멧에서 timestamp만 제거
-const morganFormat = process.env.NODE_ENV !== "production" ? "dev" : combined; // NOTE: morgan 출력 형태 server.env에서 NODE_ENV 설정 production : 배포 dev : 개발
-app.use(morgan(morganFormat, {stream : logger.stream})); // morgan 로그 설정 
-
+const morganFormat = process.env.NODE_ENV !== 'production' ? 'dev' : combined; // NOTE: morgan 출력 형태 server.env에서 NODE_ENV 설정 production : 배포 dev : 개발
+app.use(morgan(morganFormat, { stream: logger.stream })); // morgan 로그 설정
 
 //parser 및 static파일
 app.use(express.urlencoded({ extended: false }));
@@ -42,6 +48,7 @@ app.use('/user', signRouter);
 app.use('/comment', commentRouter);
 
 //에러 핸들러
-app.use(errorHandler);
+app.use(errorHandler.routeError);
+app.use(errorHandler.errorHandler);
 
 module.exports = app;

@@ -1,12 +1,12 @@
 const express = require('express');
-const cards = require('../models/cards');
+const cards = require('../models/card');
 const router = express.Router();
 const loginAuth = require('../middlewares/loginAuth/loginAuth');
 
 //페이지 랜더링
 router.get('/', loginAuth.authTokenForRender, async (req, res) => {
     const { cardId } = req.query;
-    card = await cards.findOne({ _id: cardId });
+    card = await cards.findOne({ where: { id:cardId } });
     res.render('edit', { card });
 });
 
@@ -16,14 +16,10 @@ router
     //수정
     .patch(async (req, res) => {
         const { cardId } = await req.params;
-        console.log(req.params);
-        const { pw, title, desc, author } = req.body;
-        const cardsExist = await cards.find({ _id: cardId, pw: pw });
+        const { pw, title, desc } = req.body;
+        const cardsExist = await cards.findAll({ id:cardId, pw });
         if (cardsExist.length) {
-            await cards.updateOne(
-                { _id: cardId },
-                { $set: { title, desc, author } }
-            );
+            await cards.update({ title, desc }, { where: { id:cardId } });
             res.send({ result: 'success' });
         } else {
             res.send({

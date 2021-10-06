@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const users = require('../models/user');
-const token = require('./controllers/tokenControllers/token');
 const { signupPost } = require('../service/signup/signupPost');
 const { signinPost } = require('../service/signin/signinPost')
 

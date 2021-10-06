@@ -1,5 +1,5 @@
 const express = require('express');
-const comments = require('../models/comment');
+const Comment = require('../models/comment');
 const router = express.Router();
 const loginAuth = require('../middlewares/loginAuth/loginAuth');
 const jwt = require('jsonwebtoken');
@@ -14,14 +14,12 @@ router
         } else {
             const date = new Date();
             const now = date.toLocaleString();
-            const submitTime = date.getTime();
-            await comments.create({
-                comment: comment,
-                cardId: cardId,
+            await Comment.create({
+                comment,
+                cardId,
                 date: now,
-                submitTime: submitTime,
-                author: author,
-                commentDepth: commentDepth,
+                author,
+                commentDepth,
             });
             res.send({ result: 'success' });
         }
@@ -34,19 +32,19 @@ router
             res.send({ result: 'Fail' });
         } else {
             const edited = true;
-            await comments.updateOne(
-                { _id: commentId },
-                { $set: { comment, edited, editedTime } }
+            await Comment.update(
+                { comment, edited, editedTime },
+                { where: { id: commentId } }
             );
             res.send({ result: 'success' });
         }
     })
     .delete(loginAuth.authTokenForSend, async (req, res, next) => {
         const { commentId } = req.body;
-        const commentExist = await comments.find({ _id: commentId });
+        const commentExist = await Comment.findOne({where:{ id: commentId }});
         try {
-            if (commentExist.length) {
-                await comments.deleteOne({ _id: commentId });
+            if (commentExist) {
+                await Comment.destroy({where:{ id: commentId }});
                 res.send({ result: 'success' });
             } else {
                 res.send({ result: 'Fail' });

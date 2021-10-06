@@ -31,19 +31,19 @@
                             <div class="author_d">작성자: <span class="authorI"><%= card.author %></span></div>
                             <div class="time_d">작성시간: <span class="dateI"><%= card.date %></span></div>
                           </div>
-                          <div>
-                            <button class="editBtn" onclick="window.location.href ='/edit?cardId=<%= card._id %>' ">수정하기</button>
+                          <div class="btnWrap">
+                            <button class="editBtn" onclick="window.location.href ='/edit?cardId=<%= card.id %>' ">수정하기</button>
                             <button class="deleteBtn">삭제</button>
                           </div>
                         </div>
                         <hr/>
                         <form class="commentForm" onsubmit="return false;">
-                          <textarea type="text" name="comment" class="commentInput"></textarea>
-                          <input type="hidden" name="cardId" value=<%= card._id %>>
+                          <textarea type="text" name="comment" class="commentInput" style="resize: none;"></textarea>
+                          <input type="hidden" name="cardId" value=<%= card.id %>>
                           <button  class="submitComment">등록하기</button>
                         </form>
                         <% for(let i=0; i < ment.length; i++) { %>
-                        <div class="commentWrap <%= ment[i]._id%>" style="margin-left:50*'<%= ment[i].commentDepth %>'px;">
+                        <div class="commentWrap <%= ment[i].id%>" style="margin-left:'<%= 50*ment[i].commentDepth %>'px;">
                           <div class="commentFlex">
                             <div class="comment ">
                                 <div class="com"><%= ment[i].comment %></div>
@@ -58,29 +58,29 @@
                               <div>작성자: <%= ment[i].author %></div>
                               <% if(ment[i].author == id ) {%>
                                 <div class="flexEditComment">
-                                  <div class="editComment editStyle" onclick="editComment('<%= ment[i]._id %>')">편집</div>|
-                                  <div class="deleteComment editStyle" onclick="deleteCommentModal('<%= ment[i]._id %>')">삭제</div>
+                                  <div class="editComment editStyle" onclick="editComment('<%= ment[i].id %>')">편집</div>|
+                                  <div class="deleteComment editStyle" onclick="deleteCommentModal('<%= ment[i].id %>')">삭제</div>
                                 </div>
                               <% } %>
                             </div>
                           </div>
                         </div>
-                        <div class="editInputWrap <%= ment[i]._id%> hidden">
+                        <div class="editInputWrap <%= ment[i].id%> hidden">
                           <div class="editInputWrap2">
-                            <input class="editCommentInput" type="text" value="<%= ment[i].comment %>" id="<%= ment[i]._id %>">
-                            <button class="editCommentBtn" type="button" onclick="editCommentApi('<%= ment[i]._id%>')">수정하기</button>
+                            <input class="editCommentInput" type="text" value="<%= ment[i].comment %>" id="<%= ment[i].id %>">
+                            <button class="editCommentBtn" type="button" onclick="editCommentApi('<%= ment[i].id%>')">수정하기</button>
                             <button class="cancelEditComment" type="button" onclick="window.location.reload();">취소</button>
                           </div>
                         </div>
 
-                        <div class="del-background2 hidden <%= ment[i]._id%>">
+                        <div class="del-background2 hidden <%= ment[i].id%>">
                           <div class="del-wrap2">
                             <section class="del-content2">
                                 <div class="flex-layout-between2">
                                     <h3>정말 삭제하시겠습니까?</h3>
                                     <div class="option">
-                                      <button class="del-submit-btn2" onclick="deleteComment('<%= ment[i]._id %>')">예</button>
-                                      <button class="del-close-btn2" onclick="deleteCommentModal('<%= ment[i]._id %>')">닫기</button>
+                                      <button class="del-submit-btn2" onclick="deleteComment('<%= ment[i].id %>')">예</button>
+                                      <button class="del-close-btn2" onclick="deleteCommentModal('<%= ment[i].id %>')">닫기</button>
                                     </div>
                                 </div>
                             </section>

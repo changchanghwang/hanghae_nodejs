@@ -11,6 +11,7 @@ module.exports = {
     pwAuth(id, pw, pwCheck) {
         const pwRegexp = /^[a-zA-Z0-9]{4,}$/;
         const validatedPw = pwRegexp.test(pw);
+        console.log(pw.search(id));
         if (!validatedPw) {
             // console.log('패스워드 형식에 맞춰주세요');
             return false;

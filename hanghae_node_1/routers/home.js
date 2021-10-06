@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const cards = require('../models/cards');
+const Card = require('../models/card');
 const jwt = require('jsonwebtoken');
 const loginAuth = require('../middlewares/loginAuth/loginAuth');
-const likes = require('../models/likes');
+const Like = require('../models/like');
 
 router.get('/', async (req, res) => {
-    let card = await cards.find({}).sort('-submitTime');
+    let card = await Card.findAll({ order: [['id', 'DESC']] });
     const cookie = req.cookies.login_token;
     let id = '';
     if (cookie === undefined) {
@@ -23,17 +23,17 @@ router.get('/logout', async (req, res) => {
 router.post('/like', loginAuth.authTokenForSend, async (req, res) => {
     const { cardId } = req.body;
     const userId = req.userInfo.id;
-    const likeExist = await likes.findOne({ cardId, userId });
+    const likeExist = await Like.findOne({ where: { cardId, userId } });
     if (!likeExist) {
-        await likes.create({ cardId, userId });
-        let like = await likes.countDocuments({ cardId });
-        await cards.updateOne({ _id: cardId }, { $set: { like } });
+        await Like.create({ cardId, userId });
+        let like = await Like.count({ where: { cardId } });
+        await Card.update({ like }, { where: { id:cardId } });
         res.send({ result: 'success' });
     } else if (likeExist) {
-        await likes.deleteOne({ cardId, userId });
-        let like = await likes.countDocuments({ cardId });
-        await cards.updateOne({ _id: cardId }, { $set: { like } });
-        res.send({ result: 'cancel'})
+        await Like.destroy({ where: { cardId, userId } });
+        let like = await Like.count({ where: { cardId } });
+        await Card.update({ like }, { where: { id:cardId } });
+        res.send({ result: 'cancel' });
     }
 });
 

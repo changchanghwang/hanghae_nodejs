@@ -1,12 +1,12 @@
-const users = require('../../models/user');
+const User = require('../../models/user');
 const signupAuth = require('../../routers/controllers/signupControllers/signupValidation');
 
 exports.signupPost = async (req, res) => {
     const { id, pw, pwCheck } = req.body;
     if (signupAuth.idAuth(id) && signupAuth.pwAuth(id, pw, pwCheck)) {
-        let isExist = await users.findOne({ id });
+        let isExist = await User.findOne({where:{ id }});
         if (!isExist) {
-            await users.create({ id, pw });
+            await User.create({ userId:id, pw });
             res.send({
                 result: 'success',
             });

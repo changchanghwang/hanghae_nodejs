@@ -4,8 +4,9 @@ const token = require('../../routers/controllers/tokenControllers/token');
 exports.signinPost = async (req, res, next) => {
     const { id, pw } = req.body;
     try {
-        let isExist = await users.find({ id, pw });
-        if (isExist.length) {
+        let isExist = await users.findOne({ userid:id, pw });
+        console.log(isExist.length);
+        if (isExist) {
             let accessToken = token.generateAccessToken(id);
             await res.cookie('login_token', accessToken, {
                 maxAge: 50 * 60 * 1000,
