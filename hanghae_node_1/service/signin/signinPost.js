@@ -1,13 +1,14 @@
-const users = require('../../models/user');
+const User = require('../../models/user');
 const token = require('../../routers/controllers/tokenControllers/token');
+const {loginSchema} = require('../../routers/joi');
 
 exports.signinPost = async (req, res, next) => {
-    const { id, pw } = req.body;
+    console.log(req.body);
+    const { userId, pw } = await loginSchema.validateAsync(req.body);
     try {
-        let isExist = await users.findOne({ userid:id, pw });
-        console.log(isExist.length);
+        let isExist = await User.findOne({where:{ userId, pw }});
         if (isExist) {
-            let accessToken = token.generateAccessToken(id);
+            let accessToken = token.generateAccessToken(userId);
             await res.cookie('login_token', accessToken, {
                 maxAge: 50 * 60 * 1000,
                 httpOnly: true,

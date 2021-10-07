@@ -12,16 +12,13 @@ router.route('/').get(async (req, res) => {
     const cookie = req.cookies.login_token;
     let id = '';
     if (cookie === undefined) {
-        console.log('21')
         const card = await Card.findOne({ where: { id: cardId } });
         const ment = await Comment.findAll({
             where: { cardId },
             order: [['id', 'DESC']],
         });
-        console.log(ment);
         res.render('detail', { card, ment, id });
     } else {
-        console.log('21')
         const card = await Card.findOne({ where: { id: cardId } });
         id = jwt.verify(cookie, process.env.ACCESS_TOKEN_SECRET).id;
         const ment = await Comment.findAll({

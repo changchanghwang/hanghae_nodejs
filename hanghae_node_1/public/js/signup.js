@@ -12,7 +12,7 @@ async function signup(){
         method:'POST',
         headers:{'Content-Type':"application/json"},
         body:JSON.stringify({
-            id:id,
+            userId:id,
             pw:pw,
             pwCheck:pwCheck
         })

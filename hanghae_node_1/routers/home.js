@@ -4,6 +4,7 @@ const Card = require('../models/card');
 const jwt = require('jsonwebtoken');
 const loginAuth = require('../middlewares/loginAuth/loginAuth');
 const Like = require('../models/like');
+const {likeSchema} = require('./joi');
 
 router.get('/', async (req, res) => {
     let card = await Card.findAll({ order: [['id', 'DESC']] });
@@ -20,8 +21,10 @@ router.get('/logout', async (req, res) => {
     res.clearCookie('login_token');
     res.send({ result: 'success' });
 });
+
+//좋아요
 router.post('/like', loginAuth.authTokenForSend, async (req, res) => {
-    const { cardId } = req.body;
+    const { cardId } = await likeSchema.validateAsync(req.body);
     const userId = req.userInfo.id;
     const likeExist = await Like.findOne({ where: { cardId, userId } });
     if (!likeExist) {

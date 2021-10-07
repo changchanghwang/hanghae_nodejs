@@ -1,10 +1,13 @@
 //필요한 모듈 및 연결
 const express = require('express');
 const app = express();
+const Http = require('http');
 const logger = require('./winston');
 const morgan = require('morgan');
 const { sequelize } = require('./models/index');
 const cookieParser = require('cookie-parser');
+
+const http = Http.createServer(app);
 // const connect = require('./models/index');
 // connect();
 
@@ -51,4 +54,4 @@ app.use('/comment', commentRouter);
 app.use(errorHandler.routeError);
 app.use(errorHandler.errorHandler);
 
-module.exports = app;
+module.exports = http;

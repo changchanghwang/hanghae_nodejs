@@ -36,7 +36,3 @@ async function like(id){
         window.location.href = "/user/signin"
     }
 }
-
-
-
-logoutBtn.addEventListener('click',logout);

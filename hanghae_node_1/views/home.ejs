@@ -7,6 +7,7 @@
     <title>Hwang's HangHae blog</title>
     <link rel="stylesheet" href="/css/style.css">
     <script defer src="/js/home.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
     <div class="top" onclick="window.location.href='/'">
@@ -18,7 +19,7 @@
                 <a class="toSignin" href="/user/signin"><div>로그인</div></a>
                 <a class="toSignup" href="/user/signup"><div>회원가입</div></a>
             <%} else {%>
-                <div class="toLogout">로그아웃</div>
+                <div class="toLogout" onclick="logout()">로그아웃</div>
             <%} %>
         </div>
     </div>

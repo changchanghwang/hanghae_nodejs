@@ -14,8 +14,8 @@ async function signIn(event){
         method:'POST',
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
-            id:id,
-            pw:pw
+            userId:id,
+            pw
         })
     })
     let data = await res.json();
