@@ -26,18 +26,20 @@ router
         }
     })
     .patch(loginAuth.authTokenForSend, async (req, res) => {
-        const { comment, commentId } = await commentSchema.validateAsync(req.body);
+        const { comment, commentId } = await commentSchema.validateAsync(
+            req.body
+        );
         const date = new Date();
         const editedTime = date.toLocaleString();
         if (comment === '') {
-            res.send({ result: 'Fail' });
+            res.status(400).send({ result: 'Fail' });
         } else {
             const edited = true;
             await Comment.update(
                 { comment, edited, editedTime },
                 { where: { id: commentId } }
             );
-            res.send({ result: 'success' });
+            res.status(200).send({ result: 'success' });
         }
     })
     .delete(loginAuth.authTokenForSend, async (req, res, next) => {
@@ -48,9 +50,9 @@ router
         try {
             if (commentExist) {
                 await Comment.destroy({ where: { id: commentId } });
-                res.send({ result: 'success' });
+                res.status(200).send({ result: 'success' });
             } else {
-                res.send({ result: 'Fail' });
+                res.status(400).send({ result: 'Fail' });
             }
         } catch (err) {
             next(err);

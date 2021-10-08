@@ -56,7 +56,7 @@
                             </div>
                             <div class="flexComment">
                               <div>작성자: <%= ment[i].author %></div>
-                              <% if(ment[i].author == id ) {%>
+                              <% if(ment[i].author === id ) {%>
                                 <div class="flexEditComment">
                                   <div class="editComment editStyle" onclick="editComment('<%= ment[i].id %>')">편집</div>|
                                   <div class="deleteComment editStyle" onclick="deleteCommentModal('<%= ment[i].id %>')">삭제</div>
@@ -69,7 +69,7 @@
                           <div class="editInputWrap2">
                             <input class="editCommentInput" type="text" value="<%= ment[i].comment %>" id="<%= ment[i].id %>">
                             <button class="editCommentBtn" type="button" onclick="editCommentApi('<%= ment[i].id%>')">수정하기</button>
-                            <button class="cancelEditComment" type="button" onclick="window.location.reload();">취소</button>
+                            <button class="cancelEditComment" type="button" onclick="editComment('<%= ment[i].id %>')">취소</button>
                           </div>
                         </div>
 

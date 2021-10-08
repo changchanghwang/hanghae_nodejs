@@ -21,9 +21,9 @@ router
         const cardsExist = await cards.findAll({ id: cardId, pw });
         if (cardsExist.length) {
             await cards.update({ title, desc }, { where: { id: cardId } });
-            res.send({ result: 'success' });
+            res.status(200).send({ result: 'success' });
         } else {
-            res.send({
+            res.status(400).send({
                 result: 'fail',
             });
         }

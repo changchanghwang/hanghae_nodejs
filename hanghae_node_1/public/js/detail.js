@@ -86,7 +86,6 @@ async function editCommentApi(id){
     })
   })
   let data = await res.json();
-  console.log(data.result);
   if(data.result == "success"){
     window.location.reload();
   }else if(data.result == "Fail"){

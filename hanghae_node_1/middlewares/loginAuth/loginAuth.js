@@ -1,9 +1,6 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-//db 접근하는 코드는 엉망진창이라서 다시해야됨.
-//테스트 db나 목을 구분지어서 사용해야 될 것 같음. mysql로 db 바꾸고 수정 예정
-
 module.exports = {
     authTokenForRender(req, res, next) {
         const cookie = req.cookies.login_token;
@@ -24,7 +21,7 @@ module.exports = {
     authTokenForSend(req, res, next) {
         const cookie = req.cookies.login_token;
         if (cookie === undefined) {
-            res.send({ result: 'Error' });
+            res.status(401).send({ result: 'Error' });
         } else {
             try {
                 req.userInfo = jwt.verify(

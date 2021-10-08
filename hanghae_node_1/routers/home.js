@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 });
 router.get('/logout', async (req, res) => {
     res.clearCookie('login_token');
-    res.send({ result: 'success' });
+    res.status(200).send({ result: 'success' });
 });
 
 //좋아요
@@ -31,12 +31,12 @@ router.post('/like', loginAuth.authTokenForSend, async (req, res) => {
         await Like.create({ cardId, userId });
         let like = await Like.count({ where: { cardId } });
         await Card.update({ like }, { where: { id:cardId } });
-        res.send({ result: 'success' });
+        res.status(200).send({ result: 'success' });
     } else if (likeExist) {
         await Like.destroy({ where: { cardId, userId } });
         let like = await Like.count({ where: { cardId } });
         await Card.update({ like }, { where: { id:cardId } });
-        res.send({ result: 'cancel' });
+        res.status(200).send({ result: 'cancel' });
     }
 });
 

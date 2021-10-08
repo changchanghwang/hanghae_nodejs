@@ -8,7 +8,6 @@ const Like = require('../models/like');
 
 router.route('/').get(async (req, res) => {
     const { cardId } = req.query;
-    console.log(cardId);
     const cookie = req.cookies.login_token;
     let id = '';
     if (cookie === undefined) {
@@ -37,9 +36,9 @@ router.delete('/del/:cardId', loginAuth.authTokenForSend, async (req, res) => {
         await Card.destroy({ where: { id: cardId } });
         await Comment.destroy({ where: { cardId } });
         await Like.destroy({ where: { cardId } });
-        res.send({ result: 'success' });
+        res.status(200).send({ result: 'success' });
     } else {
-        res.send({ result: 'Fail' });
+        res.status(400).send({ result: 'Fail' });
     }
 });
 module.exports = router;

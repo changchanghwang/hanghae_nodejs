@@ -24,7 +24,6 @@ async function like(id){
         })
     })
     const data = await res.json();
-    console.log(data.result)
     if(data.result==="success"){
         alert('좋아요 완료');
         window.location.reload();

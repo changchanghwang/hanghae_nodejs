@@ -18,8 +18,6 @@ async function signup(){
         })
     })
     let data = await res.json();
-    console.log(data);
-    console.log(data.result);
     if(data.result === "success"){
         alert('회원가입을 축하드립니다.')
         window.location.href = "/user/signin";

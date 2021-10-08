@@ -6,15 +6,19 @@ const logger = require('./winston');
 const morgan = require('morgan');
 const { sequelize } = require('./models/index');
 const cookieParser = require('cookie-parser');
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger-output");
 
+
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 const http = Http.createServer(app);
 // const connect = require('./models/index');
 // connect();
 
-// // sequelize 초기화
-// sequelize.sync({force:false})
-//     .then(()=>console.log('데이터베이스 연결 성공!'))
-//     .catch((err)=>console.error(err));
+// sequelize 초기화
+sequelize.sync({force:false})
+    .then(()=>console.log('데이터베이스 연결 성공!'))
+    .catch((err)=>console.error(err));
 
 //라우팅
 const homeRouter = require('./routers/home');
@@ -28,7 +32,6 @@ const commentRouter = require('./routers/comment');
 //세팅
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-
 //로거
 const combined =
     ':remote-addr - :remote-user ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';

@@ -1,6 +1,5 @@
-const app = require('./app');
-require('./socket')
+const http = require('./app');
 
-app.listen(3000, () => {
+http.listen(3000, () => {
     console.log('server listen http://localhost:3000/');
 });

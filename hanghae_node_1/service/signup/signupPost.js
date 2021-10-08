@@ -2,23 +2,23 @@ const User = require('../../models/user');
 const signupAuth = require('../../routers/controllers/signupControllers/signupValidation');
 const {signupSchema} = require('../../routers/joi')
 
-exports.signupPost = async (req, res) => {
+exports.signupPost =  async (req, res) => {
     const { userId, pw, pwCheck } = await signupSchema.validateAsync(req.body);
     if (signupAuth.idAuth(userId) && signupAuth.pwAuth(userId, pw, pwCheck)) {
         let isExist = await User.findOne({where:{ userId }});
         if (!isExist) {
             await User.create({ userId, pw });
-            res.send({
+            res.status(200).send({
                 result: 'success',
             });
         } else {
-            res.send({
+            res.status(400).send({
                 result: 'Fail',
                 msg: '중복되는 아이디가 있습니다.',
             });
         }
     } else {
-        res.send({
+        res.status(400).send({
             result: 'Fail',
             msg: '아이디 또는 패스워드를 확인해주세요.',
         });

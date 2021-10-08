@@ -20,7 +20,7 @@ router.post('/submit', loginAuth.authTokenForSend, async (req, res) => {
         author,
         pw,
     });
-    res.send({ result: 'success' });
+    res.status(200).send({ result: 'success' });
 });
 
 module.exports = router;
