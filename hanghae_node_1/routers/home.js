@@ -17,6 +17,7 @@ router.get('/', async (req, res) => {
         res.render('home', { card, id });
     }
 });
+
 router.get('/logout', async (req, res) => {
     res.clearCookie('login_token');
     res.status(200).send({ result: 'success' });

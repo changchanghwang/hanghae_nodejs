@@ -15,10 +15,7 @@ const joiSchema = {
             .required()
             .min(4)
             .pattern(/^[a-zA-Z0-9]{4,}$/),
-        pwCheck: Joi.string()
-            .required()
-            .min(4)
-            .pattern(/^[a-zA-Z0-9]{4,}$/),
+        pwCheck: Joi.ref('pw')
     }),
     commentSchema: Joi.object({
         commentId: Joi.number().min(1),
