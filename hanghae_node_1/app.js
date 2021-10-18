@@ -6,19 +6,25 @@ const logger = require('./winston');
 const morgan = require('morgan');
 const { sequelize } = require('./models/index');
 const cookieParser = require('cookie-parser');
-const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require("./swagger-output");
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('./swagger-output');
+//github
+const session = require('express-session');
+const passport = require('passport');
+require('./service/passport');
+require('dotenv').config();
+const User = require('./models/user');
 
-
-app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 const http = Http.createServer(app);
 // const connect = require('./models/index');
 // connect();
 
 // sequelize 초기화
-sequelize.sync({force:false})
-    .then(()=>console.log('데이터베이스 연결 성공!'))
-    .catch((err)=>console.error(err));
+sequelize
+  .sync({ force: false })
+  .then(() => console.log('데이터베이스 연결 성공!'))
+  .catch((err) => console.error(err));
 
 //라우팅
 const homeRouter = require('./routers/home');
@@ -29,12 +35,35 @@ const signRouter = require('./routers/user');
 const errorHandler = require('./middlewares/errorHandler');
 const commentRouter = require('./routers/comment');
 
+//github
+app.use(
+  session({
+    secret: process.env.SECRET_CODE,
+    cookie: { maxAge: 60 * 60 * 1000 },
+    resave: true,
+    saveUninitialized: false,
+  })
+);
+// 초기화. user정보가 req.user로 들어가게 됨
+app.use(passport.initialize());
+// passport 내에서 session을 사용해 로그인을 지속시킴
+app.use(passport.session());
+app.post('/auth/github', passport.authenticate('github'));
+app.get(
+  '/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/' }),
+  async (req, res) => {
+    const githubUser = await User.findOne({});
+    res.redirect('/');
+  }
+);
+
 //세팅
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 //로거
 const combined =
-    ':remote-addr - :remote-user ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
+  ':remote-addr - :remote-user ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"';
 // 기존 combined 포멧에서 timestamp만 제거
 const morganFormat = process.env.NODE_ENV !== 'production' ? 'dev' : combined; // NOTE: morgan 출력 형태 server.env에서 NODE_ENV 설정 production : 배포 dev : 개발
 app.use(morgan(morganFormat, { stream: logger.stream })); // morgan 로그 설정

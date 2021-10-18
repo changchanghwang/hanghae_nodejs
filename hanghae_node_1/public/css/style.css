@@ -238,7 +238,7 @@ a:link, a:visited{
     cursor:pointer;
     text-decoration: none;
 }
-.toSignup, .toSignin, .toLogout{
+.toSignup, .toSignin, .toLogout,.toSocial{
     color:#000 !important;
     cursor: pointer;
 }

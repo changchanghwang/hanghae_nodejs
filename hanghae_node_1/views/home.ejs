@@ -16,6 +16,7 @@
     <div class="signWrap">
         <div class="signForm">
             <% if(id ==="") {%>
+                <a class="toSocial" href="https://github.com/login/oauth/authorize?client_id=ce05d96b6beb9d617956&redirect_uri=http://localhost:3000/auth/github/callback"><div>깃허브 로그인</div></a>
                 <a class="toSignin" href="/user/signin"><div>로그인</div></a>
                 <a class="toSignup" href="/user/signup"><div>회원가입</div></a>
             <%} else {%>
