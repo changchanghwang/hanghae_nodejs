@@ -14,6 +14,8 @@ const passport = require('passport');
 require('./service/passport');
 require('dotenv').config();
 const User = require('./models/user');
+const passportConfig = require('./passport');
+// passportConfig();
 
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 const http = Http.createServer(app);
@@ -57,6 +59,21 @@ app.get(
     res.redirect('/');
   }
 );
+
+//passport 연결
+// app.use(
+//   session({
+//     resave: false,
+//     saveUninitialized: false,
+//     secret: process.env.ACCESS_TOKEN_SECRET,
+//     cookie: {
+//       httpOnly: true,
+//       secure: false,
+//     },
+//   })
+// );
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 //세팅
 app.set('views', __dirname + '/views');

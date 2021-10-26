@@ -15,11 +15,11 @@ passport.use(
     async (accessToken, refreshToken, profile, cb) => {
       try {
         // profile로 들어온 사용자 정보를 활용
+        console.log(profile._json);
         const { name, login: githubID, html_url: githubURL } = profile._json;
         console.log(profile._json);
         // 연결해둔 DB 내 User에서 검색
         let user = await User.findOne({ wehre: { githubID } });
-        let tokens = await token.generateAccessToken(githubID);
         // User에 없으면 추가로 저장
         if (!user) {
           user = new User({
